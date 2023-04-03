@@ -11,7 +11,8 @@
             const conversionRate = 8.5;
             const taxRate = 0.125;
             const result = inputEur * conversionRate * (1 - taxRate);
-            document.getElementById("result").innerHTML = result.toFixed(2) + " HKD";
+            document.getElementById("result").innerHTML = 'Without Tax: ' + result.toFixed(2) + " HKD";
+            document.getElementById('result-w-tax').innerHTML = 'With Tax: ' + (inputEur * conversionRate).toFixed(2) + ' HKD';
         }
     </script>
 </head>
@@ -20,6 +21,7 @@
     <label for="inputEur">Enter price in EUR:</label>
     <input type="number" id="inputEur" step="0.01" min="0">
     <button onclick="convertToHKD()">Convert</button>
+    <h2 id="result-w-tax"></h2>
     <h2 id="result"></h2>
 </body>
 </html>
