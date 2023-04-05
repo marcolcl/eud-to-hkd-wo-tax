@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUR to HKD Conversion</title>
     <script>
+        let conversionRate = null;
+
         function convertToHKD() {
             const inputEur = parseFloat(document.getElementById("inputEur").value);
-            const conversionRate = 8.5;
             const taxRate = 0.125;
             const result = inputEur * conversionRate * (1 - taxRate);
             document.getElementById("result").innerHTML = 'Without Tax: ' + result.toFixed(2) + " HKD";
@@ -19,6 +20,18 @@
             event.preventDefault();
             convertToHKD();
         }
+
+        async function fetchExchangeRate() {
+            const url = 'https://api.exchangerate-api.com/v4/latest/EUR';
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            conversionRate = data.rates.HKD;
+            
+            document.getElementById("conversionRate").textContent = conversionRate.toFixed(2);
+        }
+
+        window.onload = fetchExchangeRate;
     </script>
 </head>
 <body>
