@@ -1,26 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EUR to HKD Conversion</title>
     <script>
+        let conversionRate = 8.5;  // default 8.5 in case failed to fetch
+
         function convertToHKD() {
             const inputEur = parseFloat(document.getElementById("inputEur").value);
-            const conversionRate = 8.5;
             const taxRate = 0.125;
             const result = inputEur * conversionRate * (1 - taxRate);
             document.getElementById("result").innerHTML = 'Without Tax: ' + result.toFixed(2) + " HKD";
             document.getElementById('result-w-tax').innerHTML = 'With Tax: ' + (inputEur * conversionRate).toFixed(2) + ' HKD';
         }
+
+        function submitForm(event) {
+            event.preventDefault();
+            convertToHKD();
+        }
+
+        async function fetchExchangeRate() {
+            const url = 'https://api.exchangerate-api.com/v4/latest/EUR';
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            conversionRate = data.rates.HKD;
+            
+            document.getElementById("conversionRate").textContent = conversionRate.toFixed(2);
+        }
+
+        window.onload = fetchExchangeRate;
     </script>
 </head>
 <body>
     <h1>EUR to HKD Conversion</h1>
-    <label for="inputEur">Enter price in EUR:</label>
-    <input type="number" id="inputEur" step="0.01" min="0">
-    <button onclick="convertToHKD()">Convert</button>
+    <form onsubmit="submitForm(event)">
+        <label for="inputEur">Enter price in EUR:</label>
+        <input type="number" id="inputEur" step="0.01" min="0" />
+        <button type="submit">Convert</button>
+    </form>
+    <h2>Conversion Rate: <span id="conversionRate"></span></h2>
     <h2 id="result-w-tax"></h2>
     <h2 id="result"></h2>
 </body>
