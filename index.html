@@ -14,13 +14,21 @@
             document.getElementById("result").innerHTML = 'Without Tax: ' + result.toFixed(2) + " HKD";
             document.getElementById('result-w-tax').innerHTML = 'With Tax: ' + (inputEur * conversionRate).toFixed(2) + ' HKD';
         }
+
+        function submitForm(event) {
+            event.preventDefault();
+            convertToHKD();
+        }
     </script>
 </head>
 <body>
     <h1>EUR to HKD Conversion</h1>
-    <label for="inputEur">Enter price in EUR:</label>
-    <input type="number" id="inputEur" step="0.01" min="0">
-    <button onclick="convertToHKD()">Convert</button>
+    <form onsubmit="submitForm(event)">
+        <label for="inputEur">Enter price in EUR:</label>
+        <input type="number" id="inputEur" step="0.01" min="0">
+        <button type="submit">Convert</button>
+    </form>
+    <h2>Conversion Rate: <span id="conversionRate"></span></h2>
     <h2 id="result-w-tax"></h2>
     <h2 id="result"></h2>
 </body>
