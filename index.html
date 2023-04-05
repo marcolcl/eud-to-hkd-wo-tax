@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUR to HKD Conversion</title>
     <script>
-        let conversionRate = null;
+        let conversionRate = 8.5;  // default 8.5 in case failed to fetch
 
         function convertToHKD() {
             const inputEur = parseFloat(document.getElementById("inputEur").value);
