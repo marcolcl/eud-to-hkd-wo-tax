@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EUR to HKD Conversion</title>
     <script>
         let conversionRate = 8.5;  // default 8.5 in case failed to fetch
@@ -38,7 +37,7 @@
     <h1>EUR to HKD Conversion</h1>
     <form onsubmit="submitForm(event)">
         <label for="inputEur">Enter price in EUR:</label>
-        <input type="number" id="inputEur" step="0.01" min="0">
+        <input type="number" id="inputEur" step="0.01" min="0" />
         <button type="submit">Convert</button>
     </form>
     <h2>Conversion Rate: <span id="conversionRate"></span></h2>
